@@ -12,7 +12,7 @@ Prerequisite: PHP harus terpasang dan tersedia di PATH.
 1. Buka PowerShell, lalu jalankan:
 
 ```powershell
-cd 'D:\Project Present'
+cd 'D:\Project Present Madani'
 php -S localhost:8000 -t .
 ```
 
