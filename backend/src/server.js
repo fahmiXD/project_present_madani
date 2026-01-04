@@ -11,6 +11,7 @@ app.use(express.json({ limit: '5mb' }))
 // Routes
 app.use('/auth', require('./routes/auth'))
 app.use('/attendance', require('./routes/attendance'))
+app.use('/debug', require('./routes/debug'))
 
 app.get('/', (req, res) => res.json({ ok: true, message: 'Presensi Madani API' }))
 
