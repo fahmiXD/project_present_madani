@@ -9,9 +9,12 @@ export default function Login() {
   const submit = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post(process.env.NEXT_PUBLIC_API_URL + '/auth/login', { email, password })
+      const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'
+      const res = await axios.post(apiBase + '/auth/login', { email, password })
       console.log('login', res.data)
-      alert('Login OK — implement token store')
+        // store token (basic) and inform user
+        if (res.data?.token) localStorage.setItem('pm_token', res.data.token)
+        alert('Login OK')
     } catch (e) {
       setErr(e?.response?.data?.error || 'Login failed')
     }
