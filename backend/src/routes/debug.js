@@ -10,7 +10,11 @@ router.get('/users', async (req, res) => {
     res.json({ ok: true, users })
   } catch (err) {
     console.error('Debug/users error', err)
-    res.status(500).json({ error: 'Server error' })
+    if (process.env.NODE_ENV === 'production') {
+      res.status(500).json({ error: 'Server error' })
+    } else {
+      res.status(500).json({ error: 'Server error', message: err.message, stack: err.stack })
+    }
   }
 })
 
