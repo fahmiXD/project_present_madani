@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  name         String
+  email        String    @unique
+  passwordHash String
+  role         String    @default("user")
+  attendances  Attendance[]
+  createdAt    DateTime  @default(now())
+}
+
+model Schedule {
+  id        Int      @id @default(autoincrement())
+  title     String
+  date      DateTime
+  startTime DateTime
+  endTime   DateTime
+  lat       Float
+  lon       Float
+  radius    Int
+  createdAt DateTime @default(now())
+}
+
+model Attendance {
+  id         Int      @id @default(autoincrement())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int
+  scheduleId Int?
+  checkInAt  DateTime @default(now())
+  checkOutAt DateTime?
+  lat        Float
+  lon        Float
+  photoPath  String?
+  status     String   @default("present")
+  createdAt  DateTime @default(now())
+}

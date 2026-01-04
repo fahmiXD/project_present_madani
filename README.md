@@ -1,3 +1,42 @@
+# Presensi Madani Creative
+
+Monorepo with frontend (Next.js + Tailwind) and backend (Express + Prisma + MySQL).
+
+## Quick start (recommended: Docker)
+
+1. Start MySQL and Adminer:
+
+```bash
+docker-compose up -d
+```
+
+2. Backend
+
+```bash
+cd backend
+npm install
+cp .env.example .env
+# edit .env if needed (DATABASE_URL, JWT_SECRET)
+npx prisma generate
+npm run dev
+```
+
+3. Frontend
+
+```bash
+cd frontend
+npm install
+export NEXT_PUBLIC_API_URL=http://localhost:4000
+npm run dev
+```
+
+Open `http://localhost:3000` for frontend, and `http://localhost:4000` for API. Adminer is on port `8080`.
+
+## Notes
+
+- Prisma schema located at `backend/prisma/schema.prisma`.
+- API endpoints: `POST /auth/login`, `POST /attendance/checkin`, `POST /attendance/checkout`, `GET /attendance/history/:userId`.
+- The `presensi` page implements basic camera capture and geolocation and posts to the API. Improve production handling for image storage, auth, and validation.
 # Project Present Madani
 
 Repo: https://github.com/fahmiXD/project_present_madani
